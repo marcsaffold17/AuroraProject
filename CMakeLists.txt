@@ -49,7 +49,7 @@ FetchContent_MakeAvailable(json)
 
 include_directories(${CMAKE_SOURCE_DIR})
 # each unit test file needs its own executable
-add_executable(Aurora9 main.cpp IAlertReader.h AlertReader_JSON.h AlertReader_JSON.cpp)
+add_executable(Aurora9 main.cpp IAlertReader.h AlertReader_JSON.h AlertReader_JSON.cpp alertReaderFactory.h alertReaderFactory.cpp)
 
 add_executable(jsonTest tests/jsonTest.cpp)
 target_link_libraries(jsonTest PRIVATE Catch2::Catch2WithMain)
