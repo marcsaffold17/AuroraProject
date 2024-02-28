@@ -8,12 +8,12 @@
 #include "IAlertReader.h"
 
 class AlertReader_JSON : public IAlertReader {
+private:
+    const std::string product;
+    const std::string message;
+    const std::string timeDate;
 public:
-const std::string &product = "TIIA";
-const std::string &message = "*insert space stuff*";
-const std::string &timeDate = "2024-02-02 12:06:50.743";
-
-    AlertReader_JSON() = default;
+    AlertReader_JSON();
     bool isParsingCompleted() const override;
     void extractNextDataElement() override;
 };
