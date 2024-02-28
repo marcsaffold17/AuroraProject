@@ -77,3 +77,4 @@ REQUIRE(element3["message"] == "Space Weather Message Code: SUMPX1\r\nSerial Num
 "www.swpc.noaa.gov/noaa-scales-explanation");
 }
 }
+
