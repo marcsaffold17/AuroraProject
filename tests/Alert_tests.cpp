@@ -29,10 +29,15 @@ TEST_CASE("isParsingCompleted Test and extractNextDataElement Test") {
         file->extractNextDataElement();
         REQUIRE(product == "");
         REQUIRE(message == "");
-        REQUIRE(timeDate == "");
+        REQUIRE(timeDate == "");\
+        //Test Three - creating satellite observation, matching parameters
+        newObs = new Satellite(product, message, timeDate);
+        REQUIRE(newObs.getProduct() == "");
+        REQUIRE(newObs.getMessage() == "");
+        REQUIRE(newObs.getTimeDate() == "");
     }
+
 }
-//Test Two - extract by giving it json and making sure it says the same thing
-//Test Three - creating satellite observation, matching parameters
+
 //Test Four - adding observation to the vector to be stored
 //Test createAlertReader
