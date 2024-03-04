@@ -8,9 +8,14 @@
 
 class IAlertReader{
         public:
-            virtual bool isParsingCompleted() const = 0;
+
 
             // Removed "std::string &message, std::string &product, std::string &timeDate" Parameter
-            virtual void extractNextDataElement() = 0;
+            virtual std::vector< std::shared_ptr< IAlertReader >> parseData() = 0;
+            virtual std::string getProduct() = 0;
+            virtual std::string getMessage() = 0;
+            virtual std::string getTimeDate() = 0;
         };
+
+
 #endif //AURORA9_IALERTREADER_H

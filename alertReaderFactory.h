@@ -7,14 +7,17 @@
 
 #include <memory>
 #include "IAlertReader.h"
+#include <AlertReader_JSON.h>
 #include <string>
 
 class alertReaderFactory {
 public:
     alertReaderFactory() = default;
-    virtual ~alertReaderFactory() = default;
-
-    virtual std::shared_ptr<IAlertReader> createAlertReader(const std::string &fileType);
+    //Returns IAlertReaders to be expansible to other file types
+    std::shared_ptr<AlertReader_JSON> createAlertReader( std::string_view file )
+    {
+        return std::make_shared< AlertReader_JSON > (file);
+    };
 };
 
 
