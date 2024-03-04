@@ -9,6 +9,7 @@
 #include "AlertReader_JSON.h"
 #include <vector>
 #include <string>
+#include <memory>
 using json = nlohmann::json;
 //Test One - isParsingCompleted
 //Test Two - extract by giving it json and making sure it says the same thing
@@ -30,7 +31,7 @@ public:
     ~TestSatellite();
 };
 TEST_CASE("isParsingCompleted Test and extractNextDataElement Test") {
-    std::string stringData = "[\n"
+    std::string_view stringData = "[\n"
                                   "  {\n"
                                   "    \"product_id\": \"TIIA\",\n"
                                   "    \"issue_datetime\": \"2024-02-02 12:06:50.743\",\n"

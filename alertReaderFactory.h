@@ -14,7 +14,7 @@ class alertReaderFactory {
 public:
     alertReaderFactory() = default;
     //Returns IAlertReaders to be expansible to other file types
-    std::shared_ptr<AlertReader_JSON> createAlertReader( std::string_view file )
+    std::shared_ptr<AlertReader_JSON> createAlertReader( std::string_view &file )
     {
         return std::make_shared< AlertReader_JSON > (file);
     };
