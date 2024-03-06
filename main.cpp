@@ -40,9 +40,6 @@ int main()
     std::shared_ptr<AlertReader_JSON> newReader = factory.createAlertReader( stringData);
     std::vector<std::shared_ptr<IAlertReader>> parsedData = newReader->parseData();
     std::string product = parsedData[0]->getProduct();
-    std::cout << product << std::endl;
     std::string message = parsedData[0]->getMessage();
-    std::cout << message << std::endl;
     std::string timeDate = parsedData[0]->getTimeDate();
-    std::cout << timeDate << std::endl;
 }

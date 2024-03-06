@@ -26,8 +26,10 @@ std::vector< std::shared_ptr<IAlertReader>> AlertReader_JSON::parseData()
         for (const auto &jsonData : jsonData){
             std::string prodID = jsonData["product_id"];
             products.push_back(prodID);
-            timeDates.push_back(jsonData["issue_datetime"]);
-            messages.push_back(jsonData["message"]);
+            std::string issue_datetime = jsonData["issue_datetime"];
+            timeDates.push_back(issue_datetime);
+            std::string messageData = jsonData["message"];
+            messages.push_back(messageData);
         }
         //Get the number of alerts by the number of product ID's
         int numAlerts = products.size();
@@ -35,18 +37,23 @@ std::vector< std::shared_ptr<IAlertReader>> AlertReader_JSON::parseData()
         for (int i = 0; i < numAlerts; i++)
         {
             //Empty string_view, used for construction purposes (It broke every time I tried to do it without this)
-            std::string_view emptyStringView = " ";
             //Creates new instances of AlertReaders, but to hold AlertData, not to parse data
-            std::shared_ptr<AlertReader_JSON> newAlert = std::make_shared<AlertReader_JSON>(emptyStringView, products[i], timeDates[i], messages[i]);
+            std::shared_ptr<AlertDataHolder> newAlert = std::make_shared<AlertDataHolder>(" ", " ", " ");
+            std::string currProdID = products[i];
+            std::string currTimeDate = timeDates[i];
+            std::string currMessage = messages[i];
+            newAlert->setProduct(currProdID);
+            newAlert->setTimeDate(currTimeDate);
+            newAlert->setMessage(currMessage);
 
+            newAlert->printAlert();
             //Now a vector of Alerts, to be returned and iterated through
             alertVector.push_back(newAlert);
         }
     }
     else
     {
-        std::string_view emptyStringView = " ";
-        std::shared_ptr<AlertReader_JSON> newAlert = std::make_shared<AlertReader_JSON>(emptyStringView, jsonData["product_id"], jsonData["timeDates"], jsonData["messages"]);
+        std::shared_ptr<AlertDataHolder> newAlert = std::make_shared<AlertDataHolder>(jsonData["product_id"], jsonData["timeDates"], jsonData["messages"]);
         alertVector.push_back(newAlert);
     }
     //Return the vector
@@ -61,6 +68,21 @@ std::string AlertReader_JSON::getTimeDate()
     return timeDate;
 }
 std::string AlertReader_JSON::getMessage()
+{
+    return message;
+}
+
+
+
+std::string AlertDataHolder::getProduct()
+{
+    return product;
+}
+std::string AlertDataHolder::getTimeDate()
+{
+    return timeDate;
+}
+std::string AlertDataHolder::getMessage()
 {
     return message;
 }
