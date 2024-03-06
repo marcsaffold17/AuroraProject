@@ -24,9 +24,10 @@ std::vector< std::shared_ptr<IAlertReader>> AlertReader_JSON::parseData()
         std::vector <std::string> messages;
         //Add each member to their respective vectors to be held
         for (const auto &jsonData : jsonData){
-            products.push_back(jsonData["product_id"]);
-            timeDates.push_back(jsonData["timeDates"]);
-            messages.push_back(jsonData["messages"]);
+            std::string prodID = jsonData["product_id"];
+            products.push_back(prodID);
+            timeDates.push_back(jsonData["issue_datetime"]);
+            messages.push_back(jsonData["message"]);
         }
         //Get the number of alerts by the number of product ID's
         int numAlerts = products.size();
@@ -42,6 +43,24 @@ std::vector< std::shared_ptr<IAlertReader>> AlertReader_JSON::parseData()
             alertVector.push_back(newAlert);
         }
     }
+    else
+    {
+        std::string_view emptyStringView = " ";
+        std::shared_ptr<AlertReader_JSON> newAlert = std::make_shared<AlertReader_JSON>(emptyStringView, jsonData["product_id"], jsonData["timeDates"], jsonData["messages"]);
+        alertVector.push_back(newAlert);
+    }
     //Return the vector
     return alertVector;
+}
+std::string AlertReader_JSON::getProduct()
+{
+    return product;
+}
+std::string AlertReader_JSON::getTimeDate()
+{
+    return timeDate;
+}
+std::string AlertReader_JSON::getMessage()
+{
+    return message;
 }

@@ -24,12 +24,12 @@ public:
     //Constructor to be used for creating Alerts
     AlertReader_JSON(std::string_view &JsonFile, std::string Product, std::string TimeDate, std::string Message){Product = product; TimeDate = timeDate; Message = message; JsonFile = JSONFile;};
     //Parsing Completion Checker
-
+    virtual ~AlertReader_JSON(){};
     //Returns a vector of IAlertReaders, but in reality it returns AlertReader_JSON instances that hold Alert Data
     std::vector< std::shared_ptr<IAlertReader>> parseData() override;
-    std::string getProduct() override {return product;};
-    std::string getMessage() override {return message;};
-    std::string getTimeDate() override {return timeDate;};
+    std::string getProduct() override;
+    std::string getMessage() override;
+    std::string getTimeDate() override;
 };
 
 
