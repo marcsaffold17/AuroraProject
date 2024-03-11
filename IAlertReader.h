@@ -5,6 +5,8 @@
 #ifndef AURORA9_IALERTREADER_H
 #define AURORA9_IALERTREADER_H
 #include <string>
+#include <vector>
+#include <memory>
 
 class IAlertReader{
         public:
