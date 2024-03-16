@@ -4,7 +4,7 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
 
-#include "Plasma_Obs.cpp"
+#include "Plasma_Obs.h"
 #include <nlohmann/json.hpp>
 #include <iostream>
 #include <vector>
@@ -18,9 +18,11 @@ TEST_CASE("readObs Test and vector Test"){
     pd.readObs("2024-03-15 00:06:00.000","1.39","408.7","124177");
     REQUIRE(pd.getTime_Tag()=="2024-03-15 00:06:00.000");
     REQUIRE_THAT(pd.getDensity(),Catch::Matchers::WithinAbs(1.39, tolerance));
+    std::cout<<"Density is 1.39"<<std::endl;
     REQUIRE_THAT(pd.getSpeed(),Catch::Matchers::WithinAbs(408.7, tolerance));
     REQUIRE_THAT(pd.getTemperature(),Catch::Matchers::WithinAbs(124177, tolerance));
     REQUIRE_THAT(pd.getObs().at(0), Catch::Matchers::WithinAbs(1.39, tolerance));
+    std::cout<<"Density is still 1.39"<<std::endl;
     REQUIRE_THAT(pd.getObs().at(1), Catch::Matchers::WithinAbs(408.7, tolerance));
     REQUIRE_THAT(pd.getObs().at(2), Catch::Matchers::WithinAbs(124177, tolerance));
 }
