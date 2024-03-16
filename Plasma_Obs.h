@@ -19,6 +19,7 @@ private:
     float temperature;
     std::vector<float> singleObs; //1st position is time_tag, 2nd is density, 3rd is speed, 4th is temperature
     //std::vector<std::vector<float>> vectorOfObs; //Vector holding vectors of Observations, use in Satellite storage
+
 public:
     std::string getTime_Tag();
     float getDensity();
