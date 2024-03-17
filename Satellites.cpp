@@ -3,24 +3,25 @@
 //
 
 #include "Satellites.h"
-std::shared_ptr<Satellites> Satellites::getSingleSatObs(const std::string given_issue_dateTime)
+Satellite Satellite::getSingleSatObs(const std::string given_issue_dateTime)
 {
     int numSats = AllSatellites.size();
     bool satInArray = false;
     for (int i = 0; i < numSats; i++){
-        if (AllSatellites[i]->getIssueDateTime() == given_issue_dateTime){
+        if (AllSatellites[i].getIssueDateTime() == given_issue_dateTime){
             satInArray = true;
             return AllSatellites[i];
         }
     }
     if (satInArray == false){
-        std::shared_ptr<SingleSatellite> newSat;
-        newSat->setIssueDateTime(given_issue_dateTime);
+        Satellite newSat;
+        newSat.setIssueDateTime(given_issue_dateTime);
         AllSatellites.push_back(newSat);
     }
     return AllSatellites[numSats - 1];
 }
-void Satellites::addSatellite(std::shared_ptr<Satellites> newSat)
+
+void Satellite::addSatellite(Satellite newSat)
 {
     AllSatellites.push_back(newSat);
 }

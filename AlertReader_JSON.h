@@ -6,6 +6,7 @@
 #define AURORA9_ALERTREADER_JSON_H
 
 #include "IAlertReader.h"
+#include <utility>
 #include <vector>
 #include <iostream>
 
@@ -21,10 +22,10 @@ public:
     //Holds the file that is intended to be parsed
     std::string_view JSONFile;
     //Constructor for just the JSON file input
-    AlertReader_JSON(){};
-    AlertReader_JSON( std::string_view &JsonFile){ JSONFile = JsonFile;};
+    AlertReader_JSON()= default;
+    explicit AlertReader_JSON( std::string_view &JsonFile){ JSONFile = JsonFile;};
     //Parsing Completion Checker
-    virtual ~AlertReader_JSON(){};
+    virtual ~AlertReader_JSON()= default;
     //Returns a vector of IAlertReaders, but in reality it returns AlertReader_JSON instances that hold Alert Data
     std::vector< std::shared_ptr<IAlertReader>> parseData() override;
     std::string getProduct() override;
@@ -39,13 +40,13 @@ private:
     std::string timeDate;
 public:
     AlertDataHolder(std::string Product, std::string TimeDate, std::string Message){Product = product;TimeDate = timeDate; Message = message;};
-    virtual ~AlertDataHolder(){};
+    ~AlertDataHolder() override = default;
     std::string getProduct() override;
-    void setProduct(std::string prodID) { product = prodID; };
+    void setProduct(std::string prodID) { product = std::move(prodID); };
     std::string getMessage() override;
-    void setMessage(std::string MessageData) { message = MessageData; };
+    void setMessage(std::string MessageData) { message = std::move(MessageData); };
     std::string getTimeDate() override;
-    void setTimeDate(std::string issue_datetime) { timeDate = issue_datetime; };
+    void setTimeDate(std::string issue_datetime) { timeDate = std::move(issue_datetime); };
     void printAlert(){std::cout << this->product << std::endl; std::cout << this->timeDate << std::endl; std::cout << this->message << std::endl;};
 };
 
