@@ -63,37 +63,50 @@ std::vector< std::shared_ptr<Plasma_data>> PlasmaReader_JSON::parseData()
     //Return the vector
     return PlasmaVector;
 }
+///
+/// \return time_tag
 std::string PlasmaReader_JSON::getTime_Tag()
 {
     return time_tag;
 }
+///
+/// \return density(float)
 float PlasmaReader_JSON::getDensity()
 {
     return std::stof(density);
 }
+///
+/// \return speed(float)
 float PlasmaReader_JSON::getSpeed()
 {
     return std::stof(speed);
 }
-
+///
+/// \return temperature(float)
 float PlasmaReader_JSON::getTemperature() {
     return std::stof(temperature);
 }
 
-
+///
+/// \return time_tag
 std::string PlasmaDataHolder::getTime_Tag()
 {
     return time_tag;
 }
+///
+/// \return density(float)
 float PlasmaDataHolder::getDensity()
 {
     return std::stof(density);
 }
+///
+/// \return speed(float)
 float PlasmaDataHolder::getSpeed()
 {
     return std::stof(speed);
 }
-
+///
+/// \return temperature(float)
 float PlasmaDataHolder::getTemperature(){
     return std::stof(temperature);
 }
