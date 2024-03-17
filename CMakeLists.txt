@@ -62,11 +62,11 @@ FetchContent_MakeAvailable(json)
 include_directories(${CMAKE_SOURCE_DIR})
 # each unit test file needs its own executable
 
-add_executable(Aurora9 main.cpp IAlertReader.h AlertReader_JSON.h AlertReader_JSON.cpp alertReaderFactory.h alertReaderFactory.cpp Plasma_Obs.cpp plasmaReaderFactory.h Satellites.cpp
+add_executable(Aurora9 main.cpp IAlertReader.h AlertReader_JSON.h AlertReader_JSON.cpp alertReaderFactory.h Plasma_Obs.cpp plasmaReaderFactory.h Satellites.cpp
         Satellites.h)
 
 add_executable(jsonTest tests/jsonTest.cpp)
-add_executable(Alert_tests tests/Alert_tests.cpp IAlertReader.h AlertReader_JSON.h AlertReader_JSON.cpp alertReaderFactory.h alertReaderFactory.cpp)
+add_executable(Alert_tests tests/Alert_tests.cpp IAlertReader.h AlertReader_JSON.h AlertReader_JSON.cpp alertReaderFactory.h)
 add_executable(Plasma_tests tests/Plasma_tests.cpp Plasma_Obs.cpp Plasma_Obs.h plasmaReaderFactory.h PlasmaReader_JSON.cpp PlasmaReader_JSON.h)
 add_executable(SatelliteData_tests tests/SatelliteData_tests.cpp Satellites.h Satellites.cpp)
 

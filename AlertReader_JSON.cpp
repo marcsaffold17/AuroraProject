@@ -8,7 +8,8 @@
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
-
+///
+/// \return
 std::vector< std::shared_ptr<IAlertReader>> AlertReader_JSON::parseData()
 {
     //Access the file stored by the current instance of the reader
@@ -58,29 +59,40 @@ std::vector< std::shared_ptr<IAlertReader>> AlertReader_JSON::parseData()
     //Return the vector
     return alertVector;
 }
+///
+/// \return
 std::string AlertReader_JSON::getProduct()
 {
     return product;
 }
+///
+/// \return
 std::string AlertReader_JSON::getTimeDate()
 {
     return timeDate;
 }
+///
+/// \return
 std::string AlertReader_JSON::getMessage()
 {
     return message;
 }
 
 
-
+///
+/// \return
 std::string AlertDataHolder::getProduct()
 {
     return product;
 }
+///
+/// \return
 std::string AlertDataHolder::getTimeDate()
 {
     return timeDate;
 }
+///
+/// \return
 std::string AlertDataHolder::getMessage()
 {
     return message;

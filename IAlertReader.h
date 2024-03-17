@@ -13,9 +13,17 @@ class IAlertReader{
 
 
             // Removed "std::string &message, std::string &product, std::string &timeDate" Parameter
+            ///
+            /// \return
             virtual std::vector< std::shared_ptr< IAlertReader >> parseData() = 0;
+            ///
+            /// \return
             virtual std::string getProduct() = 0;
+            ///
+            /// \return
             virtual std::string getMessage() = 0;
+            ///
+            /// \return
             virtual std::string getTimeDate() = 0;
         };
 
