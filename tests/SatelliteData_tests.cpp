@@ -1,6 +1,7 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
 #include "Satellites.h"
+#include <memory>
 
 TEST_CASE("Basic constructor test and getter/setter data tests"){
     //Constructor
@@ -47,4 +48,20 @@ TEST_CASE("Basic constructor test and getter/setter data tests"){
     REQUIRE_THAT(newSat.getThetaGSM(), Catch::Matchers::WithinAbs(2.3, .001));
     newSat.setPhiGSM(2.4f);
     REQUIRE_THAT(newSat.getPhiGSM(), Catch::Matchers::WithinAbs(2.4, .001));
+}
+
+TEST_CASE("Searching for a single observation")
+{
+    std::shared_ptr<Satellites> AllSats;
+    std::shared_ptr<SingleSatellite> newSat1;
+    std::shared_ptr<SingleSatellite> newSat2;
+    std::shared_ptr<SingleSatellite> newSat3;
+    newSat1->setIssueDateTime("2024");
+    newSat2->setIssueDateTime("2025");
+    newSat3->setIssueDateTime("2026");
+    AllSats->addSatellite(newSat1);
+    AllSats->addSatellite(newSat2);
+    AllSats->addSatellite(newSat3);
+    std::vector<std::shared_ptr<Satellites>> SatVector = AllSats->getSatVector();
+    REQUIRE(SatVector[0]->getIssueDateTime() == "2024");
 }

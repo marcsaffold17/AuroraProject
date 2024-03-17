@@ -6,16 +6,20 @@
 #define AURORA9_SATELLITES_H
 #include <string>
 #include <vector>
+#include <iostream>
+#include <memory>
 
 class Satellites {
 private:
      std::vector<std::shared_ptr<Satellites>> AllSatellites;
 public:
-    Satellites(){};
+    Satellites() = default;
     virtual ~Satellites(){};
     std::shared_ptr<Satellites> getSingleSatObs(std::string given_issue_dateTime);
-    void addSatellite(std::string given_issue_dateTime);
+    void addSatellite(std::shared_ptr<Satellites> newSat);
     virtual std::string getIssueDateTime() = 0;
+    std::vector<std::shared_ptr<Satellites>> getSatVector(){std::cout<< AllSatellites.size()<<std::endl; return AllSatellites;};
+    void setSatVector(std::vector<std::shared_ptr<Satellites>> newSatVector){ AllSatellites = newSatVector;};
 };
 class SingleSatellite : public Satellites{
 private:

@@ -20,10 +20,7 @@ std::shared_ptr<Satellites> Satellites::getSingleSatObs(const std::string given_
     }
     return AllSatellites[numSats - 1];
 }
-void Satellites::addSatellite(std::string given_issue_dateTime)
+void Satellites::addSatellite(std::shared_ptr<Satellites> newSat)
 {
-    std::shared_ptr<SingleSatellite> newSat;
-    newSat->setIssueDateTime(given_issue_dateTime);
     AllSatellites.push_back(newSat);
-
 }
