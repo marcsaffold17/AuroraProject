@@ -11,7 +11,7 @@
 #include <memory>
 using json = nlohmann::json;
 
-TEST_CASE("isParsingCompleted Test and extractNextDataElement Test") {
+TEST_CASE("Alert Data Parsing Test") {
     std::string_view stringData = "[\n"
                                   "  {\n"
                                   "    \"product_id\": \"TIIA\",\n"
