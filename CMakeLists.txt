@@ -40,6 +40,18 @@ elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 
 endif()
 
+# Doxygen support
+find_package(Doxygen OPTIONAL_COMPONENTS dot mscgen dia)
+if (DOXYGEN_FOUND)
+
+    set(DOXYGEN_CALLER_GRAPH YES)
+    set(DOXYGEN_CALL_GRAPH YES)
+    set(DOXYGEN_EXTRACT_ALL YES)
+
+    doxygen_add_docs(distDocs ${PROJECT_SOURCE_DIR})
+else (DOXYGEN_FOUND)
+    message("Doxygen need to be installed to generate the doxygen documentation")
+endif (DOXYGEN_FOUND)
 
 add_subdirectory(lib/Catch2-devel)
 
