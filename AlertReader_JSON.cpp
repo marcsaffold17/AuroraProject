@@ -4,7 +4,6 @@
 
 #include "AlertReader_JSON.h"
 #include <iostream>
-#include <memory>
 #include <vector>
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
