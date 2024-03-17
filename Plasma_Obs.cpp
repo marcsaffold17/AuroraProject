@@ -14,6 +14,7 @@ float Plasma_data::getDensity() {
 float Plasma_data::getSpeed() {
     return speed;
 }
+
 float Plasma_data::getTemperature() {
     return temperature;
 }
