@@ -50,7 +50,7 @@ TEST_CASE("Basic constructor test and getter/setter data tests"){
     REQUIRE_THAT(newSat.getPhiGSM(), Catch::Matchers::WithinAbs(2.4, .001));
 }
 
-TEST_CASE("Searching for a single observation and adding satellites to the overall vector")
+TEST_CASE("Satellite Searching and adding to the overall vector")
 {
     Satellite AllSats;
     Satellite newSat1;
@@ -66,4 +66,16 @@ TEST_CASE("Searching for a single observation and adding satellites to the overa
     REQUIRE(FirstObs.getIssueDateTime() == "2024");
     Satellite ThirdObs = AllSats.getSingleSatObs("2026");
     REQUIRE(ThirdObs.getIssueDateTime() == "2026");
+}
+
+TEST_CASE("Distance Calculation testing")
+{
+    Satellite practiceSat;
+    practiceSat.setBXGSE(1.0f);
+    practiceSat.setBYGSE(1.0f);
+    practiceSat.setBZGSE(1.0f);
+    practiceSat.setBXGSM(5.0f);
+    practiceSat.setBYGSM(5.0f);
+    practiceSat.setBZGSM(5.0f);
+    REQUIRE_THAT(practiceSat.getDistance(), Catch::Matchers::WithinAbs(6.92820323028, .001));
 }

@@ -35,6 +35,7 @@ public:
     ~Satellite()  = default;
     void addSatellite(Satellite newSat);
     Satellite getSingleSatObs(std::string given_issue_dateTime);
+    float getDistance();
     std::string getProdID(){return productID;}
     void setProdID(std::string newProdID){productID = std::move(newProdID);}
     std::string getIssueDateTime() {return issue_dateTime;}
