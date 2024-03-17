@@ -49,21 +49,28 @@ FetchContent_MakeAvailable(json)
 
 include_directories(${CMAKE_SOURCE_DIR})
 # each unit test file needs its own executable
-add_executable(Aurora9 main.cpp IAlertReader.h AlertReader_JSON.h AlertReader_JSON.cpp alertReaderFactory.h alertReaderFactory.cpp
-        Satellites.cpp
-        Satellites.h)
+
+
+add_executable(SatelliteData_tests tests/SatelliteData_tests.cpp Satellites.h Satellites.cpp)
+
+add_executable(Aurora9 main.cpp IAlertReader.h AlertReader_JSON.h AlertReader_JSON.cpp alertReaderFactory.h alertReaderFactory.cpp Plasma_Obs.cpp plasmaReaderFactory.h Satellites.cpp Satellites.h)
 
 add_executable(jsonTest tests/jsonTest.cpp)
 add_executable(Alert_tests tests/Alert_tests.cpp IAlertReader.h AlertReader_JSON.h AlertReader_JSON.cpp alertReaderFactory.h alertReaderFactory.cpp)
-add_executable(SatelliteData_tests tests/SatelliteData_tests.cpp Satellites.h Satellites.cpp)
+add_executable(Plasma_tests tests/Plasma_tests.cpp Plasma_Obs.cpp Plasma_Obs.h plasmaReaderFactory.h PlasmaReader_JSON.cpp PlasmaReader_JSON.h)
+
 target_link_libraries(jsonTest PRIVATE Catch2::Catch2WithMain)
 target_link_libraries(jsonTest PRIVATE nlohmann_json::nlohmann_json)
 target_link_libraries(Alert_tests PRIVATE Catch2::Catch2WithMain)
 target_link_libraries(Alert_tests PRIVATE nlohmann_json::nlohmann_json)
 target_link_libraries(SatelliteData_tests PRIVATE Catch2::Catch2WithMain)
+target_link_libraries(Plasma_tests PRIVATE Catch2::Catch2WithMain)
+target_link_libraries(Plasma_tests PRIVATE nlohmann_json::nlohmann_json)
 target_link_libraries(Aurora9 PRIVATE nlohmann_json::nlohmann_json)
 
 include(CTest)
 add_test(NAME jsonParseTest COMMAND jsonParseTest)
 add_test(NAME Alert_tests COMMAND Alert_tests)
 add_test(NAME SatelliteData_tests COMMAND SatelliteData_tests)
+add_test(NAME Plasma_tests COMMAND Plasma_tests)
+
