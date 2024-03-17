@@ -1,35 +1,16 @@
 // Tests for AlertReader and Factory
 #include <catch2/catch_test_macros.hpp>
-#include <catch2/matchers/catch_matchers_floating_point.hpp>
-
 #include <nlohmann/json.hpp>
 #include <iostream>
 #include <alertReaderFactory.h>
 #include "IAlertReader.h"
 #include "AlertReader_JSON.h"
+#include "Satellites.h"
 #include <vector>
 #include <string>
 #include <memory>
 using json = nlohmann::json;
-//Test One - isParsingCompleted
-//Test Two - extract by giving it json and making sure it says the same thing
-class TestSatellite {
-private:
-    std::string product;
-    std::string timeDate;
-    std::string message;
-public:
-    std::string getProductSat(){return product;};
-    std::string getTimeDateSat(){return timeDate;};
-    std::string getMessageSat(){return message;};
-    TestSatellite(std::string Product, std::string TimeDate, std::string Message)
-    {
-        product = Product;
-        timeDate = TimeDate;
-        message = Message;
-    };
-    ~TestSatellite(){};
-};
+
 TEST_CASE("isParsingCompleted Test and extractNextDataElement Test") {
     std::string_view stringData = "[\n"
                                   "  {\n"
@@ -60,22 +41,7 @@ TEST_CASE("isParsingCompleted Test and extractNextDataElement Test") {
                                   "]";
     alertReaderFactory factory;
 
-// Stores pointers
-    //std::vector<std::shared_ptr<IAlertReader>> createAlertReaderVec;
-// Stores files created by factory
-    //std::vector<std::string_view> fileType;
-    //fileType.push_back(stringData);
-    //for (const auto &fileType: fileType) {
-    //    auto file = factory.createAlertReader(fileType);
-    //    if (file != nullptr) {
-    //        createAlertReaderVec.push_back(file);
-    //    }
-    //}
     std::shared_ptr<AlertReader_JSON> newReader = factory.createAlertReader( stringData);
-    //createAlertReaderVec.push_back(newReader);
-    //REQUIRE(!createAlertReaderVec.empty());
-    //for (const auto &file: createAlertReaderVec) {
-        //std::cout << newReader->isParsingCompleted() << std::endl;
         std::vector<std::shared_ptr<IAlertReader>> parsedData = newReader->parseData();
         std::string product = parsedData[1]->getProduct();
         std::cout << product << std::endl;
@@ -86,14 +52,14 @@ TEST_CASE("isParsingCompleted Test and extractNextDataElement Test") {
         REQUIRE(product == "TIIA");
         REQUIRE(timeDate == "2024-02-02 03:48:55.587");
         REQUIRE(message == "Space Weather Message Code: ALTTP2\r\nSerial Number: 1263\r\nIssue Time: 2024 Feb 02 0348 UTC\r\n\r\nALERT: Type II Radio Emission\r\nBegin Time: 2024 Feb 02 0306 UTC\r\nEstimated Velocity: 1444 km/s\r\n\r\n\r\n\r\nDescription: Type II emissions occur in association with eruptions on the sun and typically indicate a coronal mass ejection is associated with a flare event.");
-        //Test Three - creating satellite observation, matching parameters
-        std::shared_ptr<TestSatellite> newObs = std::make_shared<TestSatellite>(product, timeDate, message);
-        REQUIRE(newObs->getProductSat() == "TIIA");
-        REQUIRE(newObs->getTimeDateSat() == "2024-02-02 03:48:55.587");
-        REQUIRE(newObs->getMessageSat() == "Space Weather Message Code: ALTTP2\r\nSerial Number: 1263\r\nIssue Time: 2024 Feb 02 0348 UTC\r\n\r\nALERT: Type II Radio Emission\r\nBegin Time: 2024 Feb 02 0306 UTC\r\nEstimated Velocity: 1444 km/s\r\n\r\n\r\n\r\nDescription: Type II emissions occur in association with eruptions on the sun and typically indicate a coronal mass ejection is associated with a flare event.");
-    //}
+
+        Satellite newObs;
+        newObs.setProdID(product);
+        newObs.setIssueDateTime(timeDate);
+        newObs.setMessage(message);
+        REQUIRE(newObs.getProdID() == "TIIA");
+        REQUIRE(newObs.getIssueDateTime() == "2024-02-02 03:48:55.587");
+        REQUIRE(newObs.getMessage() == "Space Weather Message Code: ALTTP2\r\nSerial Number: 1263\r\nIssue Time: 2024 Feb 02 0348 UTC\r\n\r\nALERT: Type II Radio Emission\r\nBegin Time: 2024 Feb 02 0306 UTC\r\nEstimated Velocity: 1444 km/s\r\n\r\n\r\n\r\nDescription: Type II emissions occur in association with eruptions on the sun and typically indicate a coronal mass ejection is associated with a flare event.");
+
 
 }
-
-//Test Four - adding observation to the vector to be stored
-//Test createAlertReader

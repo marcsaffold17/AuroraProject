@@ -62,6 +62,7 @@ TEST_CASE("Satellite Searching and adding to the overall vector")
     AllSats.addSatellite(newSat1);
     AllSats.addSatellite(newSat2);
     AllSats.addSatellite(newSat3);
+    //Grab the first and last observations to prove they are at both ends and filling the entire vector
     Satellite FirstObs = AllSats.getSingleSatObs("2024");
     REQUIRE(FirstObs.getIssueDateTime() == "2024");
     Satellite ThirdObs = AllSats.getSingleSatObs("2026");

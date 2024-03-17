@@ -68,7 +68,7 @@ target_link_libraries(Plasma_tests PRIVATE nlohmann_json::nlohmann_json)
 target_link_libraries(Aurora9 PRIVATE nlohmann_json::nlohmann_json)
 
 include(CTest)
-add_test(NAME jsonParseTest COMMAND jsonParseTest)
+add_test(NAME jsonTest COMMAND jsonTest)
 add_test(NAME Alert_tests COMMAND Alert_tests)
 add_test(NAME SatelliteData_tests COMMAND SatelliteData_tests)
 add_test(NAME Plasma_tests COMMAND Plasma_tests)
