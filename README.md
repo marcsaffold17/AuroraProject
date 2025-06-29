@@ -1,3 +1,7 @@
+# Class project written in C++ in a group of 3
+# Cloned repository from github.umn.edu to github.com
+# Below is the original readme text:
+#
 # Unit Tests for Interface of Satellite Data
 #
 #
